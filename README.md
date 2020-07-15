@@ -1,3 +1,3 @@
 # Hangman
 
-**Simple Hangman game made with Python 3**
+Simple Hangman game made with Python 3
