@@ -2,13 +2,12 @@ import random
 
 #Movies
 
-movie = ["El señor de los anillos", "Yo Robot", "El padrino", "Piratas del caribe", "El hombre invisible", "Los siete samurai"]
-movieBlank = ["__ _____ __ ___ _______", "__ _____", "__ _______", "_______ ___ ______", "__ ______ _________"
-                , "___ _____ _______"]
+movie = ["THE MATRIX RELOADED", "THE TRUMAN SHOW", "FIGHT CLUB"]
+movieBlank = ["___ ______ ________", "___ ______ ____", "_____ ____"]
 
 #Random values
 
-randomNumber = random.randint(0, 5)
+randomNumber = random.randint(0, 2)
 randomMovie = movie[randomNumber]
 randomBlank = [movieBlank[randomNumber],]
 
@@ -17,6 +16,37 @@ randomBlank = [movieBlank[randomNumber],]
 gameOver, win = False, False
 failedLetters, guessedLetters = 0, 0
 failedList = []
+
+#Functions
+
+def showStats():
+  print(hangman[failedLetters])
+  print("            " + str(randomBlank[guessedLetters]) + "\n")
+  print("Failed letters: " + ', '.join(failedList) + "\n")
+
+def welcomeMessage():
+  print("""
+
+  ******** Welcome to the hangman game ******** 
+
+          
+  """)
+
+def gameOverMessage():
+  print("""
+
+            The guy was killed!!!
+            
+                 GAME OVER
+       """)
+
+def gameWonMessage():
+  print("""
+
+            You saved the poor guy!
+            
+                  YOU WON
+        """)
 
 #Hangmans
 
@@ -95,62 +125,53 @@ hangman = ["""
 
 #Welcome message
 
-print("""
-
-******** Wellcome to the hangman game ******** 
-
-          
-""")
+welcomeMessage()
 
 #Game logic
 
 while not(gameOver):
-    print(hangman[failedLetters])
-    print("         " + str(randomBlank[guessedLetters]) + "\n")
-    print("Failed letters: " + ', '.join(failedList) + "\n")
+  
+  showStats()
+  
+  letter = input("Enter a letter: ")
 
-    letter = input("Enter a letter: ")
+  while len(letter) != 1:
+    letter = input("Enter a single letter: ")
 
-    if letter not in randomMovie:
-        failedLetters += 1
-        failedList.append(letter)
+  upperLetter = letter.upper()
 
-        if failedLetters == 8:
-            gameOver = True
+  if upperLetter not in randomMovie:
+    failedLetters += 1
+    failedList.append(upperLetter)
 
-    else:
-        for i, ch in enumerate(randomMovie):
+    if failedLetters == 8:
+        gameOver = True
 
-            if ch == letter:
+  else:
+    for i, ch in enumerate(randomMovie):
 
-                lista = list(randomBlank[guessedLetters])
+      if ch == upperLetter:
+
+        lista = list(randomBlank[guessedLetters])
+  
+        for c in lista:
+          print(lista[i])
+          if lista[i] == "_":
+            lista[i] = upperLetter
+            guessedLetters += 1
+
+        randomBlank.append("".join(lista))
+            
+    if guessedLetters == len(randomBlank[guessedLetters].replace(" ", "")):
+      win = True
+      break
           
-                for c in lista:
-                    lista[i] = letter
-
-                randomBlank.append("".join(lista))
-                guessedLetters += 1
-
-        if guessedLetters == len(randomBlank[guessedLetters].replace(" ", "")):
-            win = True
-            break
-        
 #Prints Game Over message
 
 if gameOver:
-        print("""
-
-                The guy was killed!!!
-                
-                     GAME OVER
-    """)
+  gameOverMessage()
 
 #Prints Game Won message
 
 if win:
-        print("""
-
-                You saved the poor guy!
-                
-                       YOU WON
-    """)
+  gameWonMessage()
