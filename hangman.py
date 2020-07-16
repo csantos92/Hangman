@@ -1,7 +1,7 @@
 import random
 
 #Movies
-
+ 
 movie = ["THE MATRIX RELOADED", "THE TRUMAN SHOW", "FIGHT CLUB", "READY PLAYER ONE", "GHOST IN THE SHELL", "BATMAN BEGINS"]
 movieBlank = ["___ ______ ________", "___ ______ ____", "_____ ____", "_____ ______ ___", "_____ __ ___ _____", "______ ______"]
 
