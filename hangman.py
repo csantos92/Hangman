@@ -2,12 +2,12 @@ import random
 
 #Movies
 
-movie = ["THE MATRIX RELOADED", "THE TRUMAN SHOW", "FIGHT CLUB"]
-movieBlank = ["___ ______ ________", "___ ______ ____", "_____ ____"]
+movie = ["THE MATRIX RELOADED", "THE TRUMAN SHOW", "FIGHT CLUB", "READY PLAYER ONE", "GHOST IN THE SHELL", "BATMAN BEGINS"]
+movieBlank = ["___ ______ ________", "___ ______ ____", "_____ ____", "_____ ______ ___", "_____ __ ___ _____", "______ ______"]
 
 #Random values
 
-randomNumber = random.randint(0, 2)
+randomNumber = random.randint(0, 5)
 randomMovie = movie[randomNumber]
 randomBlank = [movieBlank[randomNumber],]
 
@@ -21,7 +21,7 @@ failedList = []
 
 def showStats():
   print(hangman[failedLetters])
-  print("            " + str(randomBlank[guessedLetters]) + "\n")
+  print(str(randomBlank[guessedLetters]) + "\n")
   print("Failed letters: " + ', '.join(failedList) + "\n")
 
 def welcomeMessage():
@@ -35,87 +35,87 @@ def welcomeMessage():
 def gameOverMessage():
   print("""
 
-            The guy was killed!!!
-            
-                 GAME OVER
+    The guy was killed!!!
+    
+          GAME OVER
        """)
 
 def gameWonMessage():
   print("""
 
-            You saved the poor guy!
-            
-                  YOU WON
+    You saved the poor guy!
+    
+          YOU WON
         """)
 
 #Hangmans
 
 hangman = ["""
 
-                (*_*)
-                  |
-                / | \\
-                  |
-                /   \ 
+      (*_*)
+        |
+      / | \\
+        |
+      /   \ 
      
     """,
     """
 
-                (*_*)
-                  |
-                / | \\
-                  |
-                /   
+      (*_*)
+        |
+      / | \\
+        |
+      /   
        
     """,
     """
 
-                (*_*)
-                  |
-                / | \\
-                  |
+      (*_*)
+        |
+      / | \\
+        |
                 
   
     """,
     """
 
-                (*_*)
-                  |
-                / | \\
+      (*_*)
+        |
+      / | \\
                   
                 
   
     """,
     """
 
-                (*_*)
-                  |
-                / | 
+      (*_*)
+        |
+      / | 
                   
                 
   
     """,
     """
 
-                (*_*)
-                  |
-                  | 
+      (*_*)
+        |
+        | 
                   
                 
   
     """,
     """
 
-                (*_*)
-                  |
-              
-                
+      (*_*)
+        |
+    
+                  
 
   
     """,
     """
 
-                (*_*)
+      (*_*)
                   
 
                 
@@ -155,12 +155,11 @@ while not(gameOver):
         lista = list(randomBlank[guessedLetters])
   
         for c in lista:
-          print(lista[i])
-          if lista[i] == "_":
+          
+          if lista[i] != upperLetter:
             lista[i] = upperLetter
             guessedLetters += 1
-
-        randomBlank.append("".join(lista))
+            randomBlank.append("".join(lista))
             
     if guessedLetters == len(randomBlank[guessedLetters].replace(" ", "")):
       win = True
